@@ -1,0 +1,83 @@
+:root {
+    --primary-color: #10b981;
+    --primary-hover: #059669;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --border-color: #e2e8f0;
+    --text-main: #334155;
+    --text-sub: #94a3b8;
+    
+    /* 彩虹缩进线 */
+    --guide-c0: #cbd5e1;
+    --guide-c1: #60a5fa;
+    --guide-c2: #c084fc;
+    --guide-c3: #f472b6;
+    --guide-c4: #fbbf24;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+body { background-color: var(--bg-color); color: var(--text-main); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+
+/* Header */
+header { background: var(--card-bg); padding: 0 15px; height: 50px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-color); flex-shrink: 0; }
+h1 { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+
+/* Layout */
+.main-container { flex: 1; display: grid; grid-template-columns: 1fr 1.3fr 1fr; gap: 12px; padding: 12px; overflow: hidden; }
+.panel { background: var(--card-bg); border-radius: 6px; display: flex; flex-direction: column; border: 1px solid var(--border-color); overflow: hidden; }
+.panel-header { padding: 8px 12px; border-bottom: 1px solid var(--border-color); background: #f1f5f9; display: flex; justify-content: space-between; align-items: center; height: 40px; flex-shrink: 0; }
+.panel-title { font-size: 13px; font-weight: 600; }
+.panel-body { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+
+/* Inputs */
+textarea { flex: 1; width: 100%; border: none; padding: 12px; resize: none; font-size: 12px; line-height: 1.5; outline: none; color: #333; }
+textarea:focus { background: #fff; }
+
+/* Buttons */
+button { padding: 4px 10px; border-radius: 4px; border: 1px solid transparent; font-size: 12px; cursor: pointer; transition: all 0.2s; font-family: sans-serif; }
+button.primary { background: var(--primary-color); color: white; }
+button.primary:hover { background: var(--primary-hover); }
+button.secondary { background: white; border-color: #cbd5e1; color: var(--text-main); }
+button.secondary:hover { background: #f1f5f9; border-color: #94a3b8; }
+
+/* Toggle Button */
+button.toggle-btn { display: flex; align-items: center; gap: 5px; color: var(--text-main); background: #f8fafc; border: 1px solid #cbd5e1; }
+button.toggle-btn.active { background: #eff6ff; color: #2563eb; border-color: #bfdbfe; }
+
+/* List Area */
+.toolbar { padding: 8px; border-bottom: 1px solid var(--border-color); display: flex; gap: 8px; background: white; align-items: center; }
+.search-input { flex: 1; padding: 4px 8px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 12px; outline: none; font-family: sans-serif; }
+.field-list-container { flex: 1; overflow-y: auto; background: #ffffff; padding-bottom: 20px; }
+
+/* Tree Rows */
+.field-row { display: flex; align-items: stretch; height: 26px; /* 更紧凑的行高 */ border-bottom: 1px solid transparent; }
+.field-row:hover { background: #f8fafc; }
+
+/* 缩进线系统 */
+.indent-guide-container { display: flex; flex-shrink: 0; }
+.indent-guide { width: 18px; position: relative; }
+.indent-guide::after { content: ''; position: absolute; top: 0; bottom: 0; right: 0; width: 1px; background: transparent; }
+.indent-guide.active::after { background-color: var(--guide-color); opacity: 0.3; }
+
+/* Row Content */
+.row-content { flex: 1; display: flex; align-items: center; padding-left: 6px; overflow: hidden; white-space: nowrap; }
+
+/* 1. 结构行 (Container) */
+.field-row.is-structure .row-content { color: #94a3b8; font-style: italic; }
+.field-row.is-structure:hover { background: transparent; } /* 结构行不需要hover高亮 */
+.structure-icon { width: 14px; text-align: center; margin-right: 6px; font-size: 10px; opacity: 0.6; }
+
+/* 2. 数据行 (Leaf) */
+.field-row.is-leaf { cursor: pointer; }
+.field-row.is-leaf:hover { background: #f0f9ff; }
+.field-checkbox { margin-right: 8px; cursor: pointer; }
+
+.json-key { color: #c026d3; font-weight: 500; }
+.json-idx { color: #d97706; font-size: 11px; margin-right: 4px; }
+.json-val { color: #059669; padding: 0 4px; border-radius: 2px; }
+.json-type-mark { font-size: 10px; color: #cbd5e1; margin-left: 5px; }
+
+/* Toast */
+.toast { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: #1e293b; color: white; padding: 8px 16px; border-radius: 4px; font-size: 13px; opacity: 0; transition: opacity 0.3s; pointer-events: none; font-family: sans-serif; }
+.toast.show { opacity: 1; }
+.empty-state { padding: 40px; text-align: center; color: var(--text-sub); font-size: 13px; font-family: sans-serif; }

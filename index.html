@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON 智能打码工具 V3.1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>JSON 数据脱敏 <span style="font-size:10px; background:#dbeafe; color:#1e40af; padding:2px 6px; border-radius:4px;">V3.1</span></h1>
+        <div style="display: flex; gap:8px;">
+            <button class="secondary" onclick="loadDemo()">加载示例</button>
+            <button class="secondary" onclick="resetAll()">清空</button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Panel 1: Input -->
+        <section class="panel">
+            <div class="panel-header">
+                <span class="panel-title">原始 JSON</span>
+                <button class="secondary" style="font-size:11px;" onclick="formatInput()">✨ 格式化</button>
+            </div>
+            <div class="panel-body">
+                <textarea id="inputJson" placeholder="粘贴 JSON..."></textarea>
+            </div>
+            <div style="padding: 10px; border-top: 1px solid var(--border-color);">
+                <button class="primary" style="width: 100%" onclick="parseAndRender()">解析 ➔</button>
+            </div>
+        </section>
+
+        <!-- Panel 2: Select -->
+        <section class="panel">
+            <div class="panel-header">
+                <span class="panel-title">勾选字段</span>
+                <span class="panel-title" style="font-size: 11px; color: #64748b;" id="countLabel"></span>
+            </div>
+            <div class="panel-body">
+                <div class="toolbar">
+                    <!-- 核心功能：显示层级开关 -->
+                    <button id="structureBtn" class="toggle-btn active" onclick="toggleStructureMode()" title="切换是否显示父级节点">
+                        🙈 隐藏结构
+                    </button>
+                    <div style="width:1px; height:16px; background:#e2e8f0; margin:0 4px;"></div>
+                    <input type="text" class="search-input" id="filterInput" placeholder="搜 Key..." oninput="renderTree()">
+                    <button class="secondary" onclick="toggleAll(true)">全选</button>
+                    <button class="secondary" onclick="toggleAll(false)">全不选</button>
+                </div>
+                <div class="field-list-container" id="fieldList">
+                    <div class="empty-state">等待解析...</div>
+                </div>
+            </div>
+            <div style="padding: 10px; border-top: 1px solid var(--border-color);">
+                <button class="primary" style="width: 100%" onclick="processMasking()">执行打码 ➔</button>
+            </div>
+        </section>
+
+        <!-- Panel 3: Output -->
+        <section class="panel">
+            <div class="panel-header">
+                <span class="panel-title">结果</span>
+                <button class="secondary" onclick="copyResult()">复制</button>
+            </div>
+            <div class="panel-body">
+                <textarea id="outputJson" readonly placeholder="结果..."></textarea>
+            </div>
+        </section>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
