@@ -253,7 +253,8 @@ function renderTree() {
             const valSpan = document.createElement('span');
             valSpan.className = 'json-val';
             let v = String(node.value);
-            if(v.length > 40) v = v.substring(0,40)+'...';
+            // Modified: 移除字符串截断，以便配合 CSS 横向滚动查看完整内容
+            // if(v.length > 40) v = v.substring(0,40)+'...';
             valSpan.textContent = v;
             content.appendChild(valSpan);
 

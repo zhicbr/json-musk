@@ -47,10 +47,12 @@ button.toggle-btn.active { background: #eff6ff; color: #2563eb; border-color: #b
 /* List Area */
 .toolbar { padding: 8px; border-bottom: 1px solid var(--border-color); display: flex; gap: 8px; background: white; align-items: center; }
 .search-input { flex: 1; padding: 4px 8px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 12px; outline: none; font-family: sans-serif; }
-.field-list-container { flex: 1; overflow-y: auto; background: #ffffff; padding-bottom: 20px; }
+/* Modified: overflow-y: auto -> overflow: auto (支持横向滚动) */
+.field-list-container { flex: 1; overflow: auto; background: #ffffff; padding-bottom: 20px; }
 
 /* Tree Rows */
-.field-row { display: flex; align-items: stretch; height: 26px; /* 更紧凑的行高 */ border-bottom: 1px solid transparent; }
+/* Modified: 添加 min-width 和 width 让内容可以撑开容器宽度 */
+.field-row { display: flex; align-items: stretch; height: 26px; border-bottom: 1px solid transparent; min-width: 100%; width: max-content; }
 .field-row:hover { background: #f8fafc; }
 
 /* 缩进线系统 */
@@ -60,11 +62,12 @@ button.toggle-btn.active { background: #eff6ff; color: #2563eb; border-color: #b
 .indent-guide.active::after { background-color: var(--guide-color); opacity: 0.3; }
 
 /* Row Content */
-.row-content { flex: 1; display: flex; align-items: center; padding-left: 6px; overflow: hidden; white-space: nowrap; }
+/* Modified: 删除了 overflow: hidden; 允许内容超出显示 */
+.row-content { flex: 1; display: flex; align-items: center; padding-left: 6px; white-space: nowrap; }
 
 /* 1. 结构行 (Container) */
 .field-row.is-structure .row-content { color: #94a3b8; font-style: italic; }
-.field-row.is-structure:hover { background: transparent; } /* 结构行不需要hover高亮 */
+.field-row.is-structure:hover { background: transparent; }
 .structure-icon { width: 14px; text-align: center; margin-right: 6px; font-size: 10px; opacity: 0.6; }
 
 /* 2. 数据行 (Leaf) */
